@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reddit Actions Test Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #ff4500;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+        .form-section h2 {
+            margin-top: 0;
+            color: #333;
+            border-bottom: 2px solid #ff4500;
+            padding-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        button {
+            background-color: #ff4500;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #e03d00;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        .success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        .loading {
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+        .accounts-list {
+            background-color: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .account-item {
+            padding: 8px;
+            margin: 5px 0;
+            background: white;
+            border-radius: 4px;
+            border-left: 4px solid #ff4500;
+        }
+        .account-valid {
+            border-left-color: #28a745;
+        }
+        .account-invalid {
+            border-left-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 Reddit Actions Test Form</h1>
+        
+        <!-- Account Connection Section -->
+        <div class="form-section">
+            <h2>🔗 Connect Reddit Account</h2>
+            <p style="color: #666; margin-bottom: 15px;">
+                To make posts and comments, you need to connect your Reddit account first.
+            </p>
+
+            <!-- Manual Account Addition (Temporary Solution) -->
+            <div style="background-color: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; border-radius: 4px; margin-bottom: 15px;">
+                <h3 style="margin-top: 0; color: #856404;">🛠️ Quick Setup (Manual)</h3>
+                <p style="color: #856404; margin-bottom: 10px;">
+                    <strong>Temporary solution:</strong> Add a test account manually to start testing immediately.
+                </p>
+                <form id="manual-account-form" style="display: flex; gap: 10px; align-items: end;">
+                    <div style="flex: 1;">
+                        <label for="manual-username" style="font-size: 12px;">Reddit Username:</label>
+                        <input type="text" id="manual-username" placeholder="your_reddit_username" style="padding: 8px;">
+                    </div>
+                    <button type="submit" style="background-color: #ffc107; color: #212529; padding: 8px 16px;">Add Test Account</button>
+                </form>
+            </div>
+
+            <!-- OAuth Method -->
+            <button onclick="connectRedditAccount()" style="background-color: #28a745;">Connect via Reddit OAuth</button>
+            <div id="connect-result"></div>
+        </div>
+
+        <!-- Accounts Section -->
+        <div class="form-section">
+            <h2>📋 Connected Accounts</h2>
+            <button onclick="loadAccounts()">Load Connected Accounts</button>
+            <div id="accounts-result"></div>
+        </div>
+
+        <!-- Post Submission Section -->
+        <div class="form-section">
+            <h2>📝 Submit Post</h2>
+            <form id="post-form">
+                <div class="form-group">
+                    <label for="post-account">Account:</label>
+                    <select id="post-account" required>
+                        <option value="">Select an account...</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="post-subreddit">Subreddit (without r/):</label>
+                    <input type="text" id="post-subreddit" placeholder="test" required>
+                    <small style="color: #666; display: block; margin-top: 5px;">
+                        Good test subreddits: <strong>test</strong>, <strong>testingground4bots</strong>, <strong>u_yourusername</strong> (your profile)
+                        <br>Avoid restricted subreddits like "check" which only allow trusted members.
+                    </small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="post-title">Post Title:</label>
+                    <input type="text" id="post-title" placeholder="Test post from automation dashboard" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="post-body">Post Body (for text posts):</label>
+                    <textarea id="post-body" placeholder="This is a test post from my Reddit automation dashboard."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="post-url">URL (for link posts - leave empty for text post):</label>
+                    <input type="url" id="post-url" placeholder="Leave empty for text posts">
+                </div>
+                
+                <button type="submit">Submit Post</button>
+                <button type="button" onclick="clearForm('post')">Clear</button>
+            </form>
+            <div id="post-result"></div>
+        </div>
+
+        <!-- Comment Submission Section -->
+        <div class="form-section">
+            <h2>💬 Submit Comment</h2>
+            <form id="comment-form">
+                <div class="form-group">
+                    <label for="comment-account">Account:</label>
+                    <select id="comment-account" required>
+                        <option value="">Select an account...</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="comment-post-id">Parent Post ID:</label>
+                    <input type="text" id="comment-post-id" placeholder="abc123" required>
+                    <small style="color: #666;">Find this in the post URL: reddit.com/r/subreddit/comments/<strong>POST_ID</strong>/title</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="comment-text">Comment Text:</label>
+                    <textarea id="comment-text" placeholder="This is a test comment from my automation dashboard." required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="comment-subreddit">Subreddit (optional, for logging):</label>
+                    <input type="text" id="comment-subreddit" placeholder="test">
+                </div>
+                
+                <button type="submit">Submit Comment</button>
+                <button type="button" onclick="clearForm('comment')">Clear</button>
+            </form>
+            <div id="comment-result"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000';
+
+        // Manual account addition (temporary solution)
+        document.getElementById('manual-account-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const username = document.getElementById('manual-username').value.trim();
+            if (!username) {
+                alert('Please enter a Reddit username');
+                return;
+            }
+
+            const resultDiv = document.getElementById('connect-result');
+            resultDiv.innerHTML = '<div class="result loading">Adding test account...</div>';
+
+            try {
+                const response = await fetch(`${API_BASE}/accounts/manual-add`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        refresh_token: 'test_token_' + Date.now() // Dummy token for testing
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.innerHTML = `<div class="result success">
+✅ Test account added successfully!
+
+<strong>Account Details:</strong>
+- Username: ${data.username}
+- Account ID: ${data.account_id}
+- Status: Ready for testing
+
+<strong>Note:</strong> This is a test account for UI testing only.
+For real Reddit posting, you'll need to use OAuth connection.
+                    </div>`;
+
+                    // Reload accounts to show the new one
+                    setTimeout(loadAccounts, 1000);
+                } else {
+                    resultDiv.innerHTML = `<div class="result error">Error: ${data.detail || 'Failed to add account'}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="result error">Network error: ${error.message}</div>`;
+            }
+        });
+
+        // Connect Reddit account
+        async function connectRedditAccount() {
+            const resultDiv = document.getElementById('connect-result');
+            resultDiv.innerHTML = '<div class="result loading">Initiating Reddit OAuth flow...</div>';
+
+            try {
+                const response = await fetch(`${API_BASE}/accounts/add`, {
+                    method: 'POST'
+                });
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.innerHTML = `<div class="result success">
+✅ OAuth URL generated successfully!
+
+<strong>Next Steps:</strong>
+1. Click the link below to authorize the app on Reddit
+2. After authorization, you'll be redirected back automatically
+3. Your account will be connected and ready to use
+
+<a href="${data.oauth_url}" target="_blank" style="color: #ff4500; font-weight: bold;">
+🔗 Click here to authorize on Reddit
+</a>
+
+<br><br>
+<small>State: ${data.state}</small>
+                    </div>`;
+                } else {
+                    resultDiv.innerHTML = `<div class="result error">Error: ${data.detail || 'Failed to initiate OAuth'}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="result error">Network error: ${error.message}</div>`;
+            }
+        }
+
+        // Load connected accounts
+        async function loadAccounts() {
+            const resultDiv = document.getElementById('accounts-result');
+            resultDiv.innerHTML = '<div class="result loading">Loading accounts...</div>';
+            
+            try {
+                const response = await fetch(`${API_BASE}/reddit/accounts`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    displayAccounts(data);
+                    populateAccountSelects(data.accounts);
+                } else {
+                    resultDiv.innerHTML = `<div class="result error">Error: ${data.detail || 'Failed to load accounts'}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="result error">Network error: ${error.message}</div>`;
+            }
+        }
+
+        function displayAccounts(data) {
+            const resultDiv = document.getElementById('accounts-result');
+            
+            if (data.accounts.length === 0) {
+                resultDiv.innerHTML = '<div class="result error">No connected accounts found. Please connect a Reddit account first.</div>';
+                return;
+            }
+
+            let html = `<div class="accounts-list">
+                <strong>Found ${data.total_accounts} accounts (${data.valid_accounts} valid):</strong><br><br>`;
+            
+            data.accounts.forEach(account => {
+                const statusClass = account.is_valid ? 'account-valid' : 'account-invalid';
+                const statusText = account.is_valid ? '✅ Valid' : '❌ Invalid';
+                html += `<div class="account-item ${statusClass}">
+                    <strong>ID:</strong> ${account.id} |
+                    <strong>Username:</strong> ${account.username} |
+                    <strong>Status:</strong> ${statusText}
+                    <button onclick="testAccountConnection(${account.id})" style="margin-left: 10px; padding: 5px 10px; font-size: 12px;">Test Connection</button>
+                </div>`;
+            });
+            
+            html += '</div>';
+            resultDiv.innerHTML = html;
+        }
+
+        function populateAccountSelects(accounts) {
+            const postSelect = document.getElementById('post-account');
+            const commentSelect = document.getElementById('comment-account');
+            
+            // Clear existing options (except first)
+            postSelect.innerHTML = '<option value="">Select an account...</option>';
+            commentSelect.innerHTML = '<option value="">Select an account...</option>';
+            
+            accounts.forEach(account => {
+                if (account.is_valid) {
+                    const option = `<option value="${account.id}">${account.username} (ID: ${account.id})</option>`;
+                    postSelect.innerHTML += option;
+                    commentSelect.innerHTML += option;
+                }
+            });
+        }
+
+        // Test account connection
+        async function testAccountConnection(accountId) {
+            try {
+                const response = await fetch(`${API_BASE}/reddit/test-account/${accountId}`);
+                const data = await response.json();
+
+                if (data.success) {
+                    alert(`✅ Account connection working!\nUsername: ${data.reddit_username}\nKarma: ${data.karma}`);
+                } else {
+                    alert(`❌ Account connection failed!\nError: ${data.message}`);
+                }
+            } catch (error) {
+                alert(`❌ Network error: ${error.message}`);
+            }
+        }
+
+        // Submit post
+        document.getElementById('post-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const resultDiv = document.getElementById('post-result');
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            
+            submitBtn.disabled = true;
+            resultDiv.innerHTML = '<div class="result loading">Submitting post...</div>';
+            
+            const formData = {
+                account_id: parseInt(document.getElementById('post-account').value),
+                subreddit: document.getElementById('post-subreddit').value,
+                title: document.getElementById('post-title').value,
+                body: document.getElementById('post-body').value || null,
+                url: document.getElementById('post-url').value || null
+            };
+            
+            try {
+                const response = await fetch(`${API_BASE}/reddit/submit-post`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    resultDiv.innerHTML = `<div class="result success">
+✅ Post submitted successfully!
+
+Post ID: ${data.post_id}
+Permalink: ${data.permalink}
+${data.url ? `URL: ${data.url}` : ''}
+
+Full Response:
+${JSON.stringify(data, null, 2)}
+                    </div>`;
+                } else {
+                    let errorMessage = data.message;
+                    let helpText = '';
+
+                    // Add helpful suggestions for common errors
+                    if (errorMessage.includes('SUBREDDIT_NOTALLOWED') || errorMessage.includes('trusted members')) {
+                        helpText = `
+<br><br><strong>💡 Suggestion:</strong> This subreddit only allows trusted members to post. Try these instead:
+• <strong>r/test</strong> - Open testing subreddit
+• <strong>r/testingground4bots</strong> - Specifically for bot testing
+• <strong>u/yourusername</strong> - Your own profile (replace with your Reddit username)`;
+                    } else if (errorMessage.includes('RATELIMIT')) {
+                        helpText = `<br><br><strong>💡 Suggestion:</strong> You're posting too frequently. Wait a few minutes before trying again.`;
+                    } else if (errorMessage.includes('NO_TEXT')) {
+                        helpText = `<br><br><strong>💡 Suggestion:</strong> Text posts need either a body or URL. Make sure to fill in the post body for text posts.`;
+                    }
+
+                    resultDiv.innerHTML = `<div class="result error">
+❌ Post submission failed!
+
+Error: ${errorMessage}${helpText}
+
+Full Response:
+${JSON.stringify(data, null, 2)}
+                    </div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="result error">Network error: ${error.message}</div>`;
+            } finally {
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Submit comment
+        document.getElementById('comment-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const resultDiv = document.getElementById('comment-result');
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            
+            submitBtn.disabled = true;
+            resultDiv.innerHTML = '<div class="result loading">Submitting comment...</div>';
+            
+            const formData = {
+                account_id: parseInt(document.getElementById('comment-account').value),
+                parent_post_id: document.getElementById('comment-post-id').value,
+                comment_text: document.getElementById('comment-text').value,
+                subreddit: document.getElementById('comment-subreddit').value || null
+            };
+            
+            try {
+                const response = await fetch(`${API_BASE}/reddit/submit-comment`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    resultDiv.innerHTML = `<div class="result success">
+✅ Comment submitted successfully!
+
+Comment ID: ${data.comment_id}
+Permalink: ${data.permalink}
+
+Full Response:
+${JSON.stringify(data, null, 2)}
+                    </div>`;
+                } else {
+                    resultDiv.innerHTML = `<div class="result error">
+❌ Comment submission failed!
+
+Error: ${data.message}
+
+Full Response:
+${JSON.stringify(data, null, 2)}
+                    </div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="result error">Network error: ${error.message}</div>`;
+            } finally {
+                submitBtn.disabled = false;
+            }
+        });
+
+        function clearForm(type) {
+            if (type === 'post') {
+                document.getElementById('post-form').reset();
+                document.getElementById('post-result').innerHTML = '';
+            } else if (type === 'comment') {
+                document.getElementById('comment-form').reset();
+                document.getElementById('comment-result').innerHTML = '';
+            }
+        }
+
+        // Load accounts on page load
+        window.addEventListener('load', loadAccounts);
+    </script>
+</body>
+</html>

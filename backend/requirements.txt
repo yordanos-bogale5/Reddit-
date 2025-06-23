@@ -1,0 +1,19 @@
+fastapi
+uvicorn
+praw
+sqlalchemy
+psycopg2-binary
+celery
+redis
+python-dotenv
+passlib
+alembic
+httpx
+pydantic[email]
+transformers # for NLP sentiment analysis
+scikit-learn # for NLP classification
+nltk # for text processing
+spacy # for advanced NLP
+textblob # for sentiment analysis
+vaderSentiment # for social media sentiment
+langdetect # for language detection
