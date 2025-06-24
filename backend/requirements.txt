@@ -17,3 +17,8 @@ spacy # for advanced NLP
 textblob # for sentiment analysis
 vaderSentiment # for social media sentiment
 langdetect # for language detection
+pyshorteners==1.0.1 # for URL shortening
+requests==2.31.0 # for HTTP requests
+validators==0.22.0 # for URL validation
+qrcode==7.4.2 # for QR code generation
+Pillow==10.0.1 # for image processing

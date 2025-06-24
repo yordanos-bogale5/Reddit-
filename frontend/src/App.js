@@ -7,9 +7,11 @@ import SubredditAnalytics from "./components/SubredditAnalytics";
 import AccountHealth from "./components/AccountHealth";
 import Settings from "./components/Settings";
 import AdminPanel from "./components/AdminPanel";
+import DiscordPromotion from "./components/DiscordPromotion";
 
 const tabs = [
   { id: "dashboard", name: "Dashboard", component: Dashboard },
+  { id: "discord", name: "Discord Promotion", component: DiscordPromotion },
   { id: "karma", name: "Karma Reports", component: KarmaReports },
   { id: "engagement", name: "Engagement Logs", component: EngagementLogs },
   { id: "schedule", name: "Activity Schedule", component: ActivitySchedule },

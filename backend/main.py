@@ -4,7 +4,7 @@ from fastapi.responses import FileResponse
 import logging
 import os
 
-from routers import accounts, automation, analytics, admin, nlp, safety, export, targeting, behavior, health, reddit_actions
+from routers import accounts, automation, analytics, admin, nlp, safety, export, targeting, behavior, health, reddit_actions, discord_promotion, anti_detection
 from database import create_tables
 from error_handler import global_exception_handler
 
@@ -71,3 +71,5 @@ app.include_router(targeting.router, prefix="/targeting", tags=["Targeting"])
 app.include_router(behavior.router, prefix="/behavior", tags=["Behavior"])
 app.include_router(health.router, prefix="/health", tags=["Health"])
 app.include_router(reddit_actions.router, prefix="/reddit", tags=["Reddit Actions"])
+app.include_router(discord_promotion.router, prefix="/discord-promotion", tags=["Discord Promotion"])
+app.include_router(anti_detection.router, prefix="/anti-detection", tags=["Anti-Detection"])

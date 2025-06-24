@@ -4,6 +4,20 @@ from datetime import datetime
 
 Base = declarative_base()
 
+class ShortenedUrl(Base):
+    """Database model for tracking shortened URLs"""
+    __tablename__ = 'shortened_urls'
+
+    id = Column(Integer, primary_key=True)
+    original_url = Column(String, nullable=False)
+    shortened_url = Column(String, nullable=False)
+    service = Column(String, nullable=False)  # tinyurl, bitly, etc.
+    clicks = Column(Integer, default=0)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    expires_at = Column(DateTime)
+    is_active = Column(Boolean, default=True)
+    url_metadata = Column(JSON)  # Additional tracking data
+
 class User(Base):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
@@ -123,3 +137,58 @@ class CommentQualityLog(Base):
     passed_filter = Column(Boolean)
     account = relationship('RedditAccount')
     engagement_log = relationship('EngagementLog')
+
+class PromotionCampaign(Base):
+    __tablename__ = 'promotion_campaigns'
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.id'))
+    name = Column(String, nullable=False)
+    description = Column(String)
+    discord_url = Column(String, nullable=False)
+    short_url = Column(String)  # Optional shortened URL
+    post_title = Column(String, nullable=False)
+    target_subreddits = Column(JSON)  # List of subreddit names with priority
+    preferred_subreddits = Column(JSON)  # High priority subreddits
+    posting_schedule = Column(JSON)  # Schedule configuration
+    is_active = Column(Boolean, default=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    user = relationship('User')
+    campaign_posts = relationship('CampaignPost', back_populates='campaign')
+
+class CampaignPost(Base):
+    __tablename__ = 'campaign_posts'
+    id = Column(Integer, primary_key=True)
+    campaign_id = Column(Integer, ForeignKey('promotion_campaigns.id'))
+    account_id = Column(Integer, ForeignKey('reddit_accounts.id'))
+    subreddit = Column(String, nullable=False)
+    post_id = Column(String)  # Reddit post ID
+    permalink = Column(String)
+    status = Column(String)  # success, failed, removed, shadowbanned
+    posted_at = Column(DateTime, default=datetime.utcnow)
+    removed_at = Column(DateTime)
+    error_message = Column(String)
+    upvotes = Column(Integer, default=0)
+    downvotes = Column(Integer, default=0)
+    comments_count = Column(Integer, default=0)
+    details = Column(JSON)
+    campaign = relationship('PromotionCampaign', back_populates='campaign_posts')
+    account = relationship('RedditAccount')
+
+class SubredditTarget(Base):
+    __tablename__ = 'subreddit_targets'
+    id = Column(Integer, primary_key=True)
+    campaign_id = Column(Integer, ForeignKey('promotion_campaigns.id'))
+    subreddit_name = Column(String, nullable=False)
+    priority = Column(Integer, default=1)  # 1=high, 2=medium, 3=low
+    is_preferred = Column(Boolean, default=False)
+    last_posted = Column(DateTime)
+    success_rate = Column(Float, default=0.0)
+    total_posts = Column(Integer, default=0)
+    successful_posts = Column(Integer, default=0)
+    removed_posts = Column(Integer, default=0)
+    banned_posts = Column(Integer, default=0)
+    avg_upvotes = Column(Float, default=0.0)
+    is_active = Column(Boolean, default=True)
+    notes = Column(String)
+    campaign = relationship('PromotionCampaign')

@@ -198,6 +198,166 @@
             <div id="post-result"></div>
         </div>
 
+        <!-- Discord Promotion Section -->
+        <div class="form-section" style="border: 2px solid #7289da; background-color: #f8f9ff;">
+            <h2 style="color: #7289da; border-bottom-color: #7289da;">🎮 Discord Server Promotion</h2>
+            <p style="color: #666; margin-bottom: 20px;">
+                <strong>Promote your Discord server on Norwegian NSFW subreddits automatically!</strong><br>
+                This section handles everything the client needs for Discord promotion.
+            </p>
+
+            <!-- Anti-Detection Features Section -->
+            <div class="section" style="background-color: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
+                <h3 style="color: #856404; margin-top: 0;">🛡️ Anti-Detection Features</h3>
+                <p style="color: #856404; margin-bottom: 15px;">
+                    <strong>Bypass subreddit rules and avoid post removal!</strong><br>
+                    Use these tools to create compliant content that won't be detected or removed.
+                </p>
+
+                <!-- URL Shortening -->
+                <div class="form-group">
+                    <label for="discord-url-input">Discord URL:</label>
+                    <input type="url" id="discord-url-input" placeholder="https://discord.gg/yourserver" value="http://discord.gg/Norskedamerr" style="width: 300px;">
+                    <button type="button" onclick="shortenDiscordUrl()" style="background-color: #28a745; color: white;">🔗 Shorten URL</button>
+                    <div id="shortened-url-result" style="margin-top: 10px;"></div>
+                </div>
+
+                <!-- Content Generation -->
+                <div class="form-group">
+                    <label>Generate Safe Content:</label>
+                    <select id="content-strategy" style="width: 250px;">
+                        <option value="auto">Auto-Select Strategy</option>
+                        <option value="comment_only">Clean Post + Delayed Comment</option>
+                        <option value="bio_redirect">Link in Bio Strategy</option>
+                        <option value="coded_message">Coded DM Strategy</option>
+                        <option value="image_qr">QR Code in Image</option>
+                        <option value="comment_chain">Engagement Chain Strategy</option>
+                    </select>
+                    <button type="button" onclick="generateSafeContent()" style="background-color: #17a2b8; color: white;">✨ Generate Content</button>
+                    <div id="generated-content-result" style="margin-top: 10px;"></div>
+                </div>
+
+                <!-- Compliance Check -->
+                <div class="form-group">
+                    <label>Check Content Compliance:</label>
+                    <textarea id="compliance-title" placeholder="Post title to check..." rows="2" style="width: 100%; margin-bottom: 5px;"></textarea>
+                    <textarea id="compliance-body" placeholder="Post body to check..." rows="4" style="width: 100%; margin-bottom: 5px;"></textarea>
+                    <button type="button" onclick="checkCompliance()" style="background-color: #ffc107; color: black;">🔍 Check Compliance</button>
+                    <div id="compliance-result" style="margin-top: 10px;"></div>
+                </div>
+
+                <!-- Image Generation -->
+                <div class="form-group">
+                    <label>Generate Promotional Image:</label>
+                    <select id="image-style" style="width: 150px;">
+                        <option value="auto">Auto Style</option>
+                        <option value="pink_gradient">Pink Gradient</option>
+                        <option value="purple_gradient">Purple Gradient</option>
+                        <option value="blue_gradient">Blue Gradient</option>
+                        <option value="coral_gradient">Coral Gradient</option>
+                    </select>
+                    <input type="text" id="image-text" placeholder="Custom text overlay (optional)" style="width: 200px; margin-left: 10px;">
+                    <label style="margin-left: 10px;"><input type="checkbox" id="include-qr" checked> Include QR Code</label>
+                    <button type="button" onclick="generatePromotionalImage()" style="background-color: #e83e8c; color: white; margin-left: 10px;">🎨 Generate Image</button>
+                    <div id="generated-image-result" style="margin-top: 10px;"></div>
+                </div>
+            </div>
+
+            <!-- Quick Setup -->
+            <div style="background-color: #e8f5e8; border: 1px solid #c3e6cb; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
+                <h3 style="margin-top: 0; color: #155724;">🚀 Quick Setup (Recommended)</h3>
+                <form id="discord-quick-setup-form">
+                    <div class="form-group">
+                        <label for="discord-campaign-name">Campaign Name:</label>
+                        <input type="text" id="discord-campaign-name" placeholder="My Discord Server Promotion" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="discord-url">Discord Server URL:</label>
+                        <input type="url" id="discord-url" placeholder="http://discord.gg/Norskedamerr" required>
+                        <small style="color: #666;">Your Discord server invite link</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="discord-short-url">Short URL (Optional):</label>
+                        <input type="url" id="discord-short-url" placeholder="https://3ly.link/shortened">
+                        <small style="color: #666;">Use 3ly.link or similar for better results</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="discord-title">Post Title:</label>
+                        <input type="text" id="discord-title" value="Norsk NSFW Gruppe - Deilig innhold deles daglig - Grovt & digg." required>
+                        <small style="color: #666;">Default title works best for Norwegian NSFW subreddits</small>
+                    </div>
+
+                    <button type="submit" style="background-color: #28a745;">Create Campaign with Norwegian Template</button>
+                </form>
+                <div id="discord-setup-result"></div>
+            </div>
+
+            <!-- Campaign Management -->
+            <div style="background-color: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
+                <h3 style="margin-top: 0; color: #856404;">📊 Campaign Management</h3>
+                <button onclick="loadDiscordCampaigns()" style="background-color: #17a2b8;">Load My Campaigns</button>
+                <div id="discord-campaigns-result"></div>
+            </div>
+
+            <!-- Manual Post Testing -->
+            <div style="background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
+                <h3 style="margin-top: 0; color: #721c24;">🧪 Test Single Post</h3>
+                <form id="discord-test-post-form">
+                    <div class="form-group">
+                        <label for="test-campaign">Campaign:</label>
+                        <select id="test-campaign" required>
+                            <option value="">Select a campaign...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="test-account">Account:</label>
+                        <select id="test-account" required>
+                            <option value="">Select an account...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="test-subreddit">Subreddit (optional):</label>
+                        <select id="test-subreddit">
+                            <option value="">Auto-select from campaign</option>
+                            <option value="norwaygonewildddddddd">norwaygonewildddddddd (Preferred)</option>
+                            <option value="BDSMNorge">BDSMNorge (Preferred)</option>
+                            <option value="norskefemboys">norskefemboys (Preferred)</option>
+                            <option value="norgesex">norgesex (Preferred)</option>
+                            <option value="nordicslut">nordicslut (Preferred)</option>
+                            <option value="HookupsNorway">HookupsNorway</option>
+                            <option value="KosekrokenNorgeNSFW">KosekrokenNorgeNSFW</option>
+                            <option value="test">test (Safe for testing)</option>
+                        </select>
+                        <small style="color: #666;">Leave empty to auto-select optimal subreddit</small>
+                    </div>
+
+                    <button type="submit" style="background-color: #dc3545;">Test Post Now</button>
+                </form>
+                <div id="discord-test-result"></div>
+            </div>
+
+            <!-- Automation Controls -->
+            <div style="background-color: #d1ecf1; border: 1px solid #bee5eb; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
+                <h3 style="margin-top: 0; color: #0c5460;">⚡ Automation Controls</h3>
+                <div id="automation-controls">
+                    <p style="color: #666;">Create a campaign first to see automation controls</p>
+                </div>
+            </div>
+
+            <!-- Analytics & Monitoring -->
+            <div style="background-color: #e2e3e5; border: 1px solid #d6d8db; padding: 15px; border-radius: 4px;">
+                <h3 style="margin-top: 0; color: #383d41;">📈 Analytics & Monitoring</h3>
+                <div id="analytics-controls">
+                    <p style="color: #666;">Create a campaign first to see analytics</p>
+                </div>
+            </div>
+        </div>
+
         <!-- Comment Submission Section -->
         <div class="form-section">
             <h2>💬 Submit Comment</h2>
@@ -208,23 +368,23 @@
                         <option value="">Select an account...</option>
                     </select>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="comment-post-id">Parent Post ID:</label>
                     <input type="text" id="comment-post-id" placeholder="abc123" required>
                     <small style="color: #666;">Find this in the post URL: reddit.com/r/subreddit/comments/<strong>POST_ID</strong>/title</small>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="comment-text">Comment Text:</label>
                     <textarea id="comment-text" placeholder="This is a test comment from my automation dashboard." required></textarea>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="comment-subreddit">Subreddit (optional, for logging):</label>
                     <input type="text" id="comment-subreddit" placeholder="test">
                 </div>
-                
+
                 <button type="submit">Submit Comment</button>
                 <button type="button" onclick="clearForm('comment')">Clear</button>
             </form>
@@ -369,16 +529,19 @@ For real Reddit posting, you'll need to use OAuth connection.
         function populateAccountSelects(accounts) {
             const postSelect = document.getElementById('post-account');
             const commentSelect = document.getElementById('comment-account');
-            
+            const testAccountSelect = document.getElementById('test-account');
+
             // Clear existing options (except first)
             postSelect.innerHTML = '<option value="">Select an account...</option>';
             commentSelect.innerHTML = '<option value="">Select an account...</option>';
-            
+            testAccountSelect.innerHTML = '<option value="">Select an account...</option>';
+
             accounts.forEach(account => {
                 if (account.is_valid) {
                     const option = `<option value="${account.id}">${account.username} (ID: ${account.id})</option>`;
                     postSelect.innerHTML += option;
                     commentSelect.innerHTML += option;
+                    testAccountSelect.innerHTML += option;
                 }
             });
         }
@@ -537,8 +700,642 @@ ${JSON.stringify(data, null, 2)}
             }
         }
 
+        // ===== DISCORD PROMOTION FUNCTIONS =====
+
+        // Discord quick setup
+        document.getElementById('discord-quick-setup-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const resultDiv = document.getElementById('discord-setup-result');
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+
+            submitBtn.disabled = true;
+            resultDiv.innerHTML = '<div class="result loading">Creating Discord promotion campaign...</div>';
+
+            const formData = {
+                name: document.getElementById('discord-campaign-name').value,
+                discord_url: document.getElementById('discord-url').value,
+                short_url: document.getElementById('discord-short-url').value || null,
+                custom_title: document.getElementById('discord-title').value !== 'Norsk NSFW Gruppe - Deilig innhold deles daglig - Grovt & digg.'
+                    ? document.getElementById('discord-title').value : null
+            };
+
+            try {
+                const response = await fetch(`${API_BASE}/discord-promotion/campaigns/quick-setup`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.innerHTML = `<div class="result success">
+✅ Discord promotion campaign created successfully!
+
+<strong>Campaign Details:</strong>
+- Name: ${data.name}
+- Discord URL: ${data.discord_url}
+- Post Title: "${data.post_title}"
+- Preferred Subreddits: ${data.preferred_subreddits.length}
+- Total Subreddits: ${data.target_subreddits.length}
+- Template Used: ${data.template_used}
+
+<strong>Ready for:</strong>
+✓ Manual test posts
+✓ Automated scheduling
+✓ Performance monitoring
+
+${data.message}
+                    </div>`;
+
+                    // Reload campaigns
+                    setTimeout(loadDiscordCampaigns, 1000);
+                } else {
+                    resultDiv.innerHTML = `<div class="result error">
+❌ Failed to create campaign!
+
+Error: ${data.detail || 'Unknown error'}
+
+Full Response:
+${JSON.stringify(data, null, 2)}
+                    </div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="result error">Network error: ${error.message}</div>`;
+            } finally {
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Load Discord campaigns
+        async function loadDiscordCampaigns() {
+            const resultDiv = document.getElementById('discord-campaigns-result');
+            resultDiv.innerHTML = '<div class="result loading">Loading campaigns...</div>';
+
+            try {
+                const response = await fetch(`${API_BASE}/discord-promotion/campaigns`);
+                const data = await response.json();
+
+                if (response.ok) {
+                    displayDiscordCampaigns(data);
+                    populateCampaignSelects(data);
+                } else {
+                    resultDiv.innerHTML = `<div class="result error">Error: ${data.detail || 'Failed to load campaigns'}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="result error">Network error: ${error.message}</div>`;
+            }
+        }
+
+        function displayDiscordCampaigns(campaigns) {
+            const resultDiv = document.getElementById('discord-campaigns-result');
+            const automationDiv = document.getElementById('automation-controls');
+            const analyticsDiv = document.getElementById('analytics-controls');
+
+            if (campaigns.length === 0) {
+                resultDiv.innerHTML = '<div class="result error">No campaigns found. Create one using the quick setup above.</div>';
+                return;
+            }
+
+            let html = `<div class="accounts-list">
+                <strong>Found ${campaigns.length} campaigns:</strong><br><br>`;
+
+            let automationHtml = '';
+            let analyticsHtml = '';
+
+            campaigns.forEach(campaign => {
+                const statusClass = campaign.is_active ? 'account-valid' : 'account-invalid';
+                const statusText = campaign.is_active ? '🟢 Active' : '🔴 Inactive';
+                const successRate = campaign.success_rate.toFixed(1);
+                const rateColor = successRate > 70 ? 'green' : successRate > 40 ? 'orange' : 'red';
+
+                html += `<div class="account-item ${statusClass}">
+                    <strong>Name:</strong> ${campaign.name} |
+                    <strong>Status:</strong> ${statusText} |
+                    <strong>Posts:</strong> ${campaign.total_posts} |
+                    <strong>Success Rate:</strong> <span style="color: ${rateColor}">${successRate}%</span>
+                    <br>
+                    <strong>Discord:</strong> ${campaign.discord_url}
+                    <br>
+                    <strong>Title:</strong> "${campaign.post_title}"
+                    <br>
+                    <button onclick="testCampaignPost(${campaign.id})" style="margin: 5px; padding: 5px 10px; font-size: 12px; background-color: #dc3545;">Test Post</button>
+                    <button onclick="getCampaignAnalytics(${campaign.id})" style="margin: 5px; padding: 5px 10px; font-size: 12px; background-color: #17a2b8;">Analytics</button>
+                    <button onclick="getCampaignAlerts(${campaign.id})" style="margin: 5px; padding: 5px 10px; font-size: 12px; background-color: #ffc107; color: black;">Alerts</button>
+                </div>`;
+
+                // Automation controls
+                if (campaign.is_active) {
+                    automationHtml += `
+                        <div style="margin-bottom: 10px; padding: 10px; background: white; border-radius: 4px;">
+                            <strong>${campaign.name}</strong> - Currently Active
+                            <button onclick="stopCampaign(${campaign.id})" style="margin-left: 10px; background-color: #dc3545;">Stop Automation</button>
+                        </div>`;
+                } else {
+                    automationHtml += `
+                        <div style="margin-bottom: 10px; padding: 10px; background: white; border-radius: 4px;">
+                            <strong>${campaign.name}</strong> - Inactive
+                            <button onclick="startCampaign(${campaign.id})" style="margin-left: 10px; background-color: #28a745;">Start Automation</button>
+                        </div>`;
+                }
+
+                // Analytics controls
+                analyticsHtml += `
+                    <div style="margin-bottom: 10px; padding: 10px; background: white; border-radius: 4px;">
+                        <strong>${campaign.name}</strong> - ${campaign.total_posts} posts, ${successRate}% success
+                        <button onclick="getCampaignPosts(${campaign.id})" style="margin-left: 10px; background-color: #6f42c1;">View Posts</button>
+                        <button onclick="startCampaignMonitoring(${campaign.id})" style="margin-left: 5px; background-color: #20c997;">Monitor</button>
+                    </div>`;
+            });
+
+            html += '</div>';
+            resultDiv.innerHTML = html;
+            automationDiv.innerHTML = automationHtml || '<p style="color: #666;">No campaigns available</p>';
+            analyticsDiv.innerHTML = analyticsHtml || '<p style="color: #666;">No campaigns available</p>';
+        }
+
+        function populateCampaignSelects(campaigns) {
+            const campaignSelect = document.getElementById('test-campaign');
+
+            // Clear existing options
+            campaignSelect.innerHTML = '<option value="">Select a campaign...</option>';
+
+            campaigns.forEach(campaign => {
+                const option = `<option value="${campaign.id}">${campaign.name} (${campaign.total_posts} posts)</option>`;
+                campaignSelect.innerHTML += option;
+            });
+        }
+
+        // Test campaign post
+        document.getElementById('discord-test-post-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const resultDiv = document.getElementById('discord-test-result');
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+
+            submitBtn.disabled = true;
+            resultDiv.innerHTML = '<div class="result loading">Testing Discord promotion post...</div>';
+
+            const campaignId = document.getElementById('test-campaign').value;
+            const accountId = document.getElementById('test-account').value;
+            const subreddit = document.getElementById('test-subreddit').value || null;
+
+            try {
+                const response = await fetch(`${API_BASE}/discord-promotion/campaigns/${campaignId}/test-post`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        campaign_id: parseInt(campaignId),
+                        account_id: parseInt(accountId),
+                        subreddit: subreddit
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    resultDiv.innerHTML = `<div class="result success">
+✅ Discord promotion test successful!
+
+<strong>Post Details:</strong>
+- Campaign ID: ${data.campaign_id}
+- Account ID: ${data.account_id}
+- Subreddit: r/${data.subreddit}
+${data.post_id ? `- Post ID: ${data.post_id}` : ''}
+${data.permalink ? `- Permalink: ${data.permalink}` : ''}
+
+<strong>Message:</strong> ${data.message}
+
+${data.note ? `<strong>Note:</strong> ${data.note}` : ''}
+                    </div>`;
+                } else {
+                    resultDiv.innerHTML = `<div class="result error">
+❌ Discord promotion test failed!
+
+Error: ${data.message}
+Subreddit: r/${data.subreddit}
+
+Full Response:
+${JSON.stringify(data, null, 2)}
+                    </div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="result error">Network error: ${error.message}</div>`;
+            } finally {
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Campaign automation functions
+        async function startCampaign(campaignId) {
+            try {
+                // Get valid accounts
+                const accountsResponse = await fetch(`${API_BASE}/reddit/accounts`);
+                const accountsData = await accountsResponse.json();
+                const validAccountIds = accountsData.accounts.filter(acc => acc.is_valid).map(acc => acc.id);
+
+                if (validAccountIds.length === 0) {
+                    alert('❌ No valid accounts available for automation');
+                    return;
+                }
+
+                const response = await fetch(`${API_BASE}/discord-promotion/campaigns/${campaignId}/schedule`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ account_ids: validAccountIds })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert(`✅ Campaign automation started!\n\nCampaign: ${data.message}\nAccounts: ${data.accounts_count}\nTask ID: ${data.task_id}`);
+                    loadDiscordCampaigns(); // Refresh
+                } else {
+                    alert(`❌ Failed to start automation: ${data.message || 'Unknown error'}`);
+                }
+            } catch (error) {
+                alert(`❌ Network error: ${error.message}`);
+            }
+        }
+
+        async function stopCampaign(campaignId) {
+            try {
+                const response = await fetch(`${API_BASE}/discord-promotion/campaigns/${campaignId}/schedule/stop`, {
+                    method: 'POST'
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert(`✅ Campaign automation stopped!\n\n${data.message}`);
+                    loadDiscordCampaigns(); // Refresh
+                } else {
+                    alert(`❌ Failed to stop automation: ${data.message || 'Unknown error'}`);
+                }
+            } catch (error) {
+                alert(`❌ Network error: ${error.message}`);
+            }
+        }
+
+        // Analytics functions
+        async function getCampaignAnalytics(campaignId) {
+            try {
+                const response = await fetch(`${API_BASE}/discord-promotion/campaigns/${campaignId}/analytics`);
+                const data = await response.json();
+
+                if (response.ok) {
+                    let analyticsText = `📊 CAMPAIGN ANALYTICS\n\n`;
+                    analyticsText += `Campaign: ${data.campaign_name}\n`;
+                    analyticsText += `Analysis Period: ${data.analysis_period_days} days\n\n`;
+
+                    analyticsText += `SUMMARY:\n`;
+                    analyticsText += `- Total Posts: ${data.summary.total_posts}\n`;
+                    analyticsText += `- Successful: ${data.summary.successful_posts}\n`;
+                    analyticsText += `- Failed: ${data.summary.failed_posts}\n`;
+                    analyticsText += `- Removed: ${data.summary.removed_posts}\n`;
+                    analyticsText += `- Success Rate: ${data.summary.success_rate}%\n`;
+                    analyticsText += `- Total Upvotes: ${data.summary.total_upvotes}\n`;
+                    analyticsText += `- Avg Upvotes/Post: ${data.summary.avg_upvotes_per_post}\n\n`;
+
+                    analyticsText += `TOP PERFORMING SUBREDDITS:\n`;
+                    data.top_performing_subreddits.forEach(([subreddit, stats], index) => {
+                        analyticsText += `${index + 1}. r/${subreddit} - ${stats.success_rate.toFixed(1)}% success (${stats.successful}/${stats.total} posts)\n`;
+                    });
+
+                    alert(analyticsText);
+                } else {
+                    alert(`❌ Failed to get analytics: ${data.detail || 'Unknown error'}`);
+                }
+            } catch (error) {
+                alert(`❌ Network error: ${error.message}`);
+            }
+        }
+
+        async function getCampaignAlerts(campaignId) {
+            try {
+                const response = await fetch(`${API_BASE}/discord-promotion/campaigns/${campaignId}/alerts`);
+                const data = await response.json();
+
+                if (response.ok) {
+                    let alertsText = `🚨 CAMPAIGN ALERTS\n\n`;
+                    alertsText += `Campaign: ${data.campaign_name}\n`;
+                    alertsText += `Overall Status: ${data.overall_status.toUpperCase()}\n`;
+                    alertsText += `Total Alerts: ${data.total_alerts}\n`;
+                    alertsText += `Critical: ${data.critical_alerts} | Warnings: ${data.warning_alerts}\n\n`;
+
+                    if (data.alerts.length === 0) {
+                        alertsText += `✅ No alerts - Campaign is running smoothly!`;
+                    } else {
+                        alertsText += `ALERTS:\n`;
+                        data.alerts.forEach((alert, index) => {
+                            const icon = alert.severity === 'critical' ? '🔴' : '⚠️';
+                            alertsText += `${icon} ${alert.type.toUpperCase()}\n`;
+                            alertsText += `   Message: ${alert.message}\n`;
+                            alertsText += `   Recommendation: ${alert.recommendation}\n\n`;
+                        });
+                    }
+
+                    alert(alertsText);
+                } else {
+                    alert(`❌ Failed to get alerts: ${data.detail || 'Unknown error'}`);
+                }
+            } catch (error) {
+                alert(`❌ Network error: ${error.message}`);
+            }
+        }
+
+        async function getCampaignPosts(campaignId) {
+            try {
+                const response = await fetch(`${API_BASE}/discord-promotion/campaigns/${campaignId}/posts?limit=10`);
+                const data = await response.json();
+
+                if (response.ok) {
+                    let postsText = `📝 RECENT CAMPAIGN POSTS\n\n`;
+                    postsText += `Campaign: ${data.campaign_name}\n`;
+                    postsText += `Total Posts: ${data.total_posts}\n\n`;
+
+                    if (data.posts.length === 0) {
+                        postsText += `No posts found for this campaign.`;
+                    } else {
+                        postsText += `RECENT POSTS (Last 10):\n`;
+                        data.posts.forEach((post, index) => {
+                            const statusIcon = post.status === 'success' ? '✅' : post.status === 'failed' ? '❌' : '🗑️';
+                            postsText += `${index + 1}. ${statusIcon} r/${post.subreddit}\n`;
+                            postsText += `   Posted: ${new Date(post.posted_at).toLocaleString()}\n`;
+                            postsText += `   Status: ${post.status}\n`;
+                            if (post.post_id) postsText += `   Post ID: ${post.post_id}\n`;
+                            if (post.upvotes) postsText += `   Upvotes: ${post.upvotes}\n`;
+                            if (post.error_message) postsText += `   Error: ${post.error_message}\n`;
+                            postsText += `\n`;
+                        });
+                    }
+
+                    alert(postsText);
+                } else {
+                    alert(`❌ Failed to get posts: ${data.detail || 'Unknown error'}`);
+                }
+            } catch (error) {
+                alert(`❌ Network error: ${error.message}`);
+            }
+        }
+
+        async function startCampaignMonitoring(campaignId) {
+            try {
+                const response = await fetch(`${API_BASE}/discord-promotion/campaigns/${campaignId}/monitor`, {
+                    method: 'POST'
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert(`✅ Campaign monitoring started!\n\n${data.message}\nTask ID: ${data.task_id}`);
+                } else {
+                    alert(`❌ Failed to start monitoring: ${data.message || 'Unknown error'}`);
+                }
+            } catch (error) {
+                alert(`❌ Network error: ${error.message}`);
+            }
+        }
+
+        // Helper function for testing individual campaigns
+        async function testCampaignPost(campaignId) {
+            // Get first valid account
+            const accountsResponse = await fetch(`${API_BASE}/reddit/accounts`);
+            const accountsData = await accountsResponse.json();
+            const validAccount = accountsData.accounts.find(acc => acc.is_valid);
+
+            if (!validAccount) {
+                alert('❌ No valid accounts available for testing');
+                return;
+            }
+
+            // Set form values and submit
+            document.getElementById('test-campaign').value = campaignId;
+            document.getElementById('test-account').value = validAccount.id;
+            document.getElementById('test-subreddit').value = 'test'; // Safe for testing
+
+            // Trigger form submission
+            document.getElementById('discord-test-post-form').dispatchEvent(new Event('submit'));
+        }
+
+        // Anti-Detection Functions
+        async function shortenDiscordUrl() {
+            const urlInput = document.getElementById('discord-url-input');
+            const resultDiv = document.getElementById('shortened-url-result');
+
+            if (!urlInput.value) {
+                resultDiv.innerHTML = '<div class="result error">Please enter a Discord URL</div>';
+                return;
+            }
+
+            resultDiv.innerHTML = '<div class="result loading">Shortening URL...</div>';
+
+            try {
+                const response = await fetch(`${API_BASE}/anti-detection/shorten-url`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        url: urlInput.value,
+                        create_redirect_chain: true
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    resultDiv.innerHTML = `<div class="result success">
+✅ URL shortened successfully!
+
+<strong>Original:</strong> ${data.data.original_url}
+<strong>Shortened:</strong> ${data.data.final_url || data.data.shortened_url}
+<strong>Service:</strong> ${data.data.service}
+${data.data.chain_length ? `<strong>Redirect Chain:</strong> ${data.data.chain_length} levels` : ''}
+
+<button onclick="navigator.clipboard.writeText('${data.data.final_url || data.data.shortened_url}')" style="background-color: #28a745; color: white; margin-top: 10px;">📋 Copy Shortened URL</button>
+                    </div>`;
+                } else {
+                    resultDiv.innerHTML = `<div class="result error">❌ Failed to shorten URL: ${data.error}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="result error">❌ Network error: ${error.message}</div>`;
+            }
+        }
+
+        async function generateSafeContent() {
+            const strategy = document.getElementById('content-strategy').value;
+            const discordUrl = document.getElementById('discord-url-input').value;
+            const resultDiv = document.getElementById('generated-content-result');
+
+            resultDiv.innerHTML = '<div class="result loading">Generating safe content...</div>';
+
+            try {
+                const response = await fetch(`${API_BASE}/anti-detection/generate-content`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        discord_url: discordUrl || null,
+                        strategy: strategy === 'auto' ? null : strategy,
+                        num_variations: 1
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    const content = data.data;
+                    resultDiv.innerHTML = `<div class="result success">
+✅ Safe content generated!
+
+<strong>Strategy:</strong> ${content.strategy}
+<strong>Title:</strong> ${content.title}
+<strong>Body:</strong> ${content.body}
+
+${content.comment_instructions ? `<strong>Comment Strategy:</strong> Add comment after ${content.comment_instructions.delay_minutes} minutes with: "${content.comment_instructions.comment_text}"` : ''}
+${content.qr_code_url ? '<strong>Image Required:</strong> Generate image with QR code' : ''}
+${content.bio_update_required ? '<strong>Bio Update:</strong> Update profile bio with Discord link' : ''}
+
+<button onclick="copyContentToForm('${content.title.replace(/'/g, "\\'")}', '${content.body.replace(/'/g, "\\'")}')">📋 Copy to Post Form</button>
+                    </div>`;
+                } else {
+                    resultDiv.innerHTML = `<div class="result error">❌ Failed to generate content: ${data.error}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="result error">❌ Network error: ${error.message}</div>`;
+            }
+        }
+
+        async function checkCompliance() {
+            const title = document.getElementById('compliance-title').value;
+            const body = document.getElementById('compliance-body').value;
+            const resultDiv = document.getElementById('compliance-result');
+
+            if (!title && !body) {
+                resultDiv.innerHTML = '<div class="result error">Please enter title or body to check</div>';
+                return;
+            }
+
+            resultDiv.innerHTML = '<div class="result loading">Checking compliance...</div>';
+
+            try {
+                const response = await fetch(`${API_BASE}/anti-detection/check-compliance`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        title: title,
+                        body: body,
+                        has_image: false,
+                        subreddit: 'norwaygonewildddddddd'
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    const result = data.data;
+                    const scoreColor = result.compliance_score >= 80 ? 'green' : result.compliance_score >= 60 ? 'orange' : 'red';
+
+                    let violationsText = '';
+                    if (result.violations.length > 0) {
+                        violationsText = '<strong>❌ Violations:</strong><br>' + result.violations.map(v => `• ${v.violation}`).join('<br>');
+                    }
+
+                    let warningsText = '';
+                    if (result.warnings.length > 0) {
+                        warningsText = '<strong>⚠️ Warnings:</strong><br>' + result.warnings.map(w => `• ${w.violation || w.description}`).join('<br>');
+                    }
+
+                    resultDiv.innerHTML = `<div class="result ${result.is_compliant ? 'success' : 'error'}">
+<strong>Compliance Score: <span style="color: ${scoreColor}">${result.compliance_score}/100</span></strong>
+<strong>Status:</strong> ${result.is_compliant ? '✅ Compliant' : '❌ Not Compliant'}
+
+${violationsText}
+${warningsText}
+
+${result.suggested_fixes ? '<strong>💡 Suggested Fixes:</strong><br>' + result.suggested_fixes.map(f => `• ${f.fix}`).join('<br>') : ''}
+                    </div>`;
+                } else {
+                    resultDiv.innerHTML = `<div class="result error">❌ Failed to check compliance: ${data.error}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="result error">❌ Network error: ${error.message}</div>`;
+            }
+        }
+
+        async function generatePromotionalImage() {
+            const discordUrl = document.getElementById('discord-url-input').value;
+            const style = document.getElementById('image-style').value;
+            const textOverlay = document.getElementById('image-text').value;
+            const includeQr = document.getElementById('include-qr').checked;
+            const resultDiv = document.getElementById('generated-image-result');
+
+            if (!discordUrl) {
+                resultDiv.innerHTML = '<div class="result error">Please enter a Discord URL first</div>';
+                return;
+            }
+
+            resultDiv.innerHTML = '<div class="result loading">Generating promotional image...</div>';
+
+            try {
+                const response = await fetch(`${API_BASE}/anti-detection/generate-image`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        discord_url: discordUrl,
+                        style: style,
+                        include_qr: includeQr,
+                        text_overlay: textOverlay || null
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    const imageData = data.data;
+                    resultDiv.innerHTML = `<div class="result success">
+✅ Promotional image generated!
+
+<strong>Style:</strong> ${imageData.style}
+<strong>Dimensions:</strong> ${imageData.dimensions[0]}x${imageData.dimensions[1]}
+<strong>QR Code:</strong> ${imageData.qr_included ? 'Included' : 'Not included'}
+<strong>Text:</strong> ${imageData.text_overlay}
+
+<img src="data:image/png;base64,${imageData.image_data}" style="max-width: 300px; border: 1px solid #ddd; margin: 10px 0;">
+
+<button onclick="downloadImage('${imageData.image_data}', 'promotional-image.png')" style="background-color: #28a745; color: white; margin-top: 10px;">💾 Download Image</button>
+                    </div>`;
+                } else {
+                    resultDiv.innerHTML = `<div class="result error">❌ Failed to generate image: ${data.error}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="result error">❌ Network error: ${error.message}</div>`;
+            }
+        }
+
+        function copyContentToForm(title, body) {
+            document.getElementById('post-title').value = title;
+            document.getElementById('post-body').value = body;
+            alert('✅ Content copied to post form!');
+        }
+
+        function downloadImage(base64Data, filename) {
+            const link = document.createElement('a');
+            link.href = 'data:image/png;base64,' + base64Data;
+            link.download = filename;
+            link.click();
+        }
+
         // Load accounts on page load
-        window.addEventListener('load', loadAccounts);
+        window.addEventListener('load', () => {
+            loadAccounts();
+            loadDiscordCampaigns();
+        });
     </script>
 </body>
 </html>
